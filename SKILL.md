@@ -177,6 +177,8 @@ Never type equations as plain text (`x_i^2`, `sigma^2`, `10^-6`). They look brok
 
 **Inline symbols in bullets and captions → native text runs, not images.** Use pptxgenjs `subscript: true` / `superscript: true` runs in Open Sans, e.g. `[{ text: "x", options: { italic: true } }, { text: "i", options: { subscript: true } }]`. Unicode Greek (σ, θ, μ) is fine inline.
 
+**Define every notation.** Every symbol in an equation, drawing label or inline math — each variable, subscript, superscript, accent (hat, bar, bold) and non-standard operator — is defined in words on the slide where it is used, beside the equation or as a label on the drawing (e.g. "θ: door opening angle", "T_BA: pose of the moving part relative to the base"). If it was defined several slides earlier, restate it briefly. Speaker notes do not count.
+
 ### Avoid (Academic-Specific)
 
 - **No decorative icons** — icons in colored circles, stock images, clip art are inappropriate for analytical academic presentations. Hand-drawn objects are welcome when they carry content.
@@ -212,6 +214,7 @@ Academic QA checklist:
 □ Text sizes measured on every text box: body ≥ 20 pt, drawing labels 16–18 pt, citations 12–14 pt
 □ Open Sans for slide text, Solitreo inside drawings, Neo Euler for math — no other typefaces
 □ Every equation typeset (Neo Euler PNG for display math, subscript runs inline) — no plain-text underscores or carets
+□ Every notation defined on the slide: go symbol by symbol through each expression and label (variables, subscripts, superscripts, accents, operators) — none left for the audience to guess
 □ Every drawing is a native shape group ("Illustration: <name>"), not a picture
 □ Blue = focus, beige = context, orange = highlight — consistent on every slide
 □ Nothing relies on color alone (add a mark, label or pattern too); beige fills have ink outlines
