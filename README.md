@@ -12,7 +12,11 @@ This skill overrides Claude's default design-forward presentation style and repl
 - Place **one exhibit per results slide** and annotate the key finding directly on the chart
 - Apply **citation standards**: in-text citations on every borrowed figure, a References slide at the end
 - End on a **Conclusions slide** that stays on screen during Q&A — never on "Thank You" or a blank
-- Apply minimal, communication-first design: white backgrounds, single sans-serif font, three colours maximum, no decorative icons
+- Apply a communication-first **hand-drawn sketchbook style**:
+  - off-white paper background on every slide, black ink, one blue for the slide's focus, beige for context, orange hand-drawn marks (loops, underlines, arrows) to highlight
+  - drawings and charts sketched with [rough.js](https://roughjs.com) and delivered as **editable, grouped shapes** (ungroup, recolour, retype labels) rather than pictures
+  - Open Sans for slide text, Solitreo handwriting inside drawings, and all mathematics typeset in Neo Euler via XeLaTeX
+  - no decorative icons, no dark slides, no lines under titles
 
 ## Installation
 
@@ -33,6 +37,8 @@ Just ask naturally:
 
 Claude will detect the academic context, load this skill automatically, and apply all guidelines before generating any slides. You do not need to give any special instructions.
 
+**Fonts on your computer:** install [Solitreo](https://fonts.google.com/specimen/Solitreo) and [Open Sans](https://fonts.google.com/specimen/Open+Sans) so drawing labels and slide text show correctly. In Google Slides, add them through **Font → More fonts**. Equations are images, so they need no font.
+
 This skill works alongside Anthropic's built-in PPTX skill, which handles the technical file generation. This skill handles content, argument structure, and design standards.
 
 ## File Structure
@@ -42,6 +48,13 @@ academic-pptx-skill/
 ├── SKILL.md                  # Entry point: routing logic and design standards
 ├── content_guidelines.md     # Argument structure, action titles, citations, deck architecture
 ├── slide_patterns.md         # Per-slide-type implementation patterns with PptxGenJS code
+├── scripts/
+│   ├── draw_helpers.js         # rough.js helpers: palette, shapes, labels, highlight marks
+│   ├── render_illustrations.py # renders drawings (PNG preview) and exports their shapes
+│   ├── vec.js                  # rebuilds a drawing as native, editable PowerPoint shapes
+│   ├── group_illustrations.py  # groups each drawing, rounds stroke ends, adds alt text
+│   └── render_equation.py      # typesets an equation in Neo Euler → transparent PNG
+├── LICENSE
 └── README.md                 # This file
 ```
 
@@ -53,6 +66,10 @@ The guidelines in this skill draw on:
 - Standard consulting and academic presentation practice (McKinsey, conference norms)
 - Community feedback on Claude's default presentation behaviour in professional contexts
 
+## Credits
+
+Based on [gabberflast/academic-pptx-skill](https://github.com/gabberflast/academic-pptx-skill) by Gabberflast. The content and argument-structure guidance is unchanged from the original; this fork changes the visual style (palette, fonts, hand-drawn editable drawings, math typesetting) and adds the scripts that produce it.
+
 ## License
 
-MIT — free to use, adapt, and share.
+MIT — free to use, adapt, and share. See [LICENSE](LICENSE).

@@ -12,25 +12,32 @@ Apply these to every slide in an academic deck:
 
 ```javascript
 const COLORS = {
-  bg:       "FFFFFF",   // White background
-  primary:  "1F4E79",   // Dark navy — titles
-  accent:   "2E75B6",   // Mid-blue — headers, highlights
-  body:     "2D2D2D",   // Near-black — body text
-  muted:    "777777",   // Gray — citations, captions
-  rule:     "CCCCCC",   // Light gray — divider lines
-  highlight:"FFF2CC",   // Yellow — callout boxes (use sparingly)
+  bg:       "FAF9F6",   // Paper (off-white) — every slide, no dark slides
+  primary:  "1E1E1E",   // Ink — titles, outlines
+  accent:   "2F6FD8",   // Blue — the focus of the slide, section headers
+  body:     "2B2B2B",   // Body text
+  muted:    "737373",   // Citations, captions (4.5:1 on paper)
+  fill:     "E9D8C0",   // Beige — context objects, comparison bars (always ink-outlined)
+  lightFill:"F3EADD",   // Light beige — panels, callout boxes
+  highlight:"D9731A",   // Orange — hand-drawn "look here" marks
 };
 
 const FONTS = {
-  face: "Arial",         // Single typeface throughout
+  face: "Open Sans",     // All slide text outside drawings (set as theme font too)
+  draw: "Solitreo",      // Labels inside drawings
   title: 26,             // Action title: 24–28 pt
   sectionHeader: 22,     // Within-slide section headers
   body: 20,              // Body bullets: 20 pt minimum
   label: 16,             // Chart annotations, inline labels
   cite: 13,              // In-slide citations, footnotes
 };
+// Math: Neo Euler PNGs from scripts/render_equation.py (see SKILL.md)
+// Drawings and charts: rough.js → editable shape groups via scripts/ (see SKILL.md)
 
+pres.theme = { headFontFace: FONTS.face, bodyFontFace: FONTS.face };
 const MARGIN = 0.5;      // Minimum margin from slide edge (inches)
+// Every slide
+slide.background = { color: COLORS.bg };
 ```
 
 ---
@@ -40,35 +47,32 @@ const MARGIN = 0.5;      // Minimum margin from slide edge (inches)
 **Purpose:** Establish the presentation; give the audience complete attribution.
 
 ```javascript
-// Dark background treatment — one of the few places for it
-slide.background = { color: COLORS.primary };
+// Same paper background as every other slide (no dark slides)
+slide.background = { color: COLORS.bg };
 
 // Main title — framed as a statement or question
 slide.addText("Treatment effect of early childhood interventions\npersists into adulthood across all income quartiles", {
   x: 0.7, y: 1.4, w: 8.6, h: 1.8,
-  fontSize: 32, fontFace: FONTS.face, color: "FFFFFF",
+  fontSize: 32, fontFace: FONTS.face, color: COLORS.primary,
   bold: true, align: "left", valign: "top"
 });
 
 // Subtitle / conference context
 slide.addText("Annual Conference of the Society for Labor Economics  ·  May 2025", {
   x: 0.7, y: 3.2, w: 8.6, h: 0.4,
-  fontSize: 16, fontFace: FONTS.face, color: "A0BBDD",
+  fontSize: 16, fontFace: FONTS.face, color: COLORS.accent,
   align: "left"
 });
 
 // Author and affiliation
 slide.addText("Jane Smith¹  ·  John Doe²\n¹ University of X   ²aboratory for Y", {
   x: 0.7, y: 3.7, w: 8.6, h: 0.6,
-  fontSize: 15, fontFace: FONTS.face, color: "CADCFC",
+  fontSize: 15, fontFace: FONTS.face, color: COLORS.body,
   align: "left"
 });
 
-// Thin accent rule above author block
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: 0.7, y: 3.6, w: 2.0, h: 0.04,
-  fill: { color: COLORS.accent }, line: { color: COLORS.accent }
-});
+// Optional: a small hand-drawn sketch of the topic on the right (scripts/vec.js)
+// addIllustration(pres, slide, "out/hero.json", 6.2, 1.2, 1, "<what it shows>");
 ```
 
 **Do not include:** Decorative images, animated logos, institution crests (unless explicitly requested), clip art.
@@ -86,12 +90,6 @@ Layout: Two-column (context left, gap/problem right) or single-column narrative.
 slide.addText("Existing interventions show strong short-run effects but evidence on persistence is sparse", {
   x: MARGIN, y: 0.2, w: 9.0, h: 0.8,
   fontSize: FONTS.title, fontFace: FONTS.face, color: COLORS.primary, bold: true, valign: "top"
-});
-
-// Thin divider under title
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: MARGIN, y: 1.0, w: 9.0, h: 0.025,
-  fill: { color: COLORS.rule }
 });
 
 // Body bullets
@@ -128,15 +126,11 @@ slide.addText("This paper asks: do early childhood effects persist to age 35,\na
   fontSize: FONTS.title, fontFace: FONTS.face, color: COLORS.primary, bold: true
 });
 
-// Divider
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: MARGIN, y: 1.1, w: 9.0, h: 0.025, fill: { color: COLORS.rule }
-});
 
 // Research question in a prominent callout box
 slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
   x: 1.5, y: 1.4, w: 7.0, h: 1.6,
-  fill: { color: "EBF3FA" }, line: { color: COLORS.accent, pt: 1.5 }, rectRadius: 0.1
+  fill: { color: COLORS.lightFill }, line: { color: COLORS.primary, pt: 1.5 }, rectRadius: 0.1
 });
 
 slide.addText("Do effects of the X program on cognitive and socio-emotional skills\nat age 8 persist to age 35 outcomes (earnings, health, crime),\nand does the pathway run through skills or through schooling attainment?", {
@@ -170,10 +164,6 @@ slide.addText("Regression discontinuity exploits a sharp household income thresh
   fontSize: FONTS.title, fontFace: FONTS.face, color: COLORS.primary, bold: true
 });
 
-// Divider
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: MARGIN, y: 1.1, w: 9.0, h: 0.025, fill: { color: COLORS.rule }
-});
 
 // Two-column: design on left, key variables on right
 // Left column header
@@ -236,45 +226,25 @@ slide.addText("Treated children earn 18% more at age 35 — effect is largest in
   fontSize: FONTS.title, fontFace: FONTS.face, color: COLORS.primary, bold: true
 });
 
-// Divider
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: MARGIN, y: 1.05, w: 9.0, h: 0.025, fill: { color: COLORS.rule }
-});
 
-// FIGURE (left side) — rebuilt from paper, not copy-pasted
-// Replace with actual chart or image
-slide.addChart(pres.charts.BAR, [{
-  name: "Treatment effect (%)",
-  labels: ["Q1 (lowest)", "Q2", "Q3", "Q4 (highest)"],
-  values: [28, 22, 15, 8]
-}], {
-  x: MARGIN, y: 1.15, w: 5.4, h: 3.8,
-  barDir: "col",
-  chartColors: [COLORS.accent],
-  chartArea: { fill: { color: COLORS.bg } },
-  catAxisLabelColor: COLORS.muted,
-  valAxisLabelColor: COLORS.muted,
-  valGridLine: { color: "E2E8F0", size: 0.5 },
-  catGridLine: { style: "none" },
-  showValue: true,
-  dataLabelColor: "1E293B",
-  showLegend: false,
-  valAxisTitle: "Log earnings effect (%)",
-  showValAxisTitle: true,
-  valAxisTitleColor: COLORS.muted,
-  valAxisTitleFontSize: 12,
-});
-
-// KEY FINDING ANNOTATION — tell the audience exactly what to see
-// (In practice, add a call-out arrow/box over the chart image or use addText overlay)
-slide.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-  x: 0.55, y: 1.2, w: 1.8, h: 0.5,
-  fill: { color: COLORS.highlight }, line: { color: "E6C800", pt: 1 }, rectRadius: 0.06
-});
-slide.addText("↑ 28% for Q1", {
-  x: 0.55, y: 1.2, w: 1.8, h: 0.5,
-  fontSize: 14, fontFace: FONTS.face, color: "7A5200", bold: true, align: "center", valign: "middle"
-});
+// FIGURE (left side) — a hand-drawn rough.js chart rebuilt as editable shapes.
+// Define it in illus.js (bars in beige, the focal bar in blue, values written on the bars,
+// Solitreo labels) and mark the key finding with an orange highlight, e.g.:
+//   effect: { w: 540, h: 380, draw() {
+//     [["Q1", 28], ["Q2", 22], ["Q3", 15], ["Q4", 8]].forEach(([q, v], i) => {
+//       const x = 50 + i * 120, top = 330 - v * 10;
+//       rect(x, top, 80, v * 10, { fill: i === 0 ? BLUE : BEIGE });
+//       text(x + 40, top - 10, v + "%", { anchor: "middle", color: i === 0 ? BLUE : INK });
+//       text(x + 40, 362, q, { anchor: "middle" });
+//     });
+//     line(30, 330, 520, 330);
+//     hlLoop(90, 32, 90, 50);                       // KEY FINDING — tell the audience what to see
+//   } }
+// Render with scripts/render_illustrations.py, then place it:
+addIllustration(pres, slide, "out/effect.json", MARGIN, 1.15, 1,
+  "Bar chart of earnings effect by income quartile: Q1 28%, Q2 22%, Q3 15%, Q4 8%; Q1 highlighted");
+// If the user supplied a finished plot instead, insert it as given (cropped, readable, cited):
+// slide.addImage({ path: "user_plot.png", x: MARGIN, y: 1.15, w: 5.4, h: 3.8, altText: "..." });
 
 // INTERPRETIVE TEXT (right side)
 slide.addText("What to take away", {
@@ -301,7 +271,7 @@ slide.addText("Administrative earnings records, Social Security Administration (
 
 **Critical checks for results slides:**
 - Action title states the finding, not the topic
-- Key result is annotated directly on the chart (arrow, box, highlight, or call-out label)
+- Key result is marked directly on the chart with an orange hand-drawn highlight (loop, underline, arrow or box)
 - Source cited at the bottom
 - No second chart or second finding on the same slide
 
@@ -318,10 +288,6 @@ slide.addText("Results support a skill-formation pathway: the earnings effect is
   fontSize: FONTS.title, fontFace: FONTS.face, color: COLORS.primary, bold: true
 });
 
-// Divider
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: MARGIN, y: 1.1, w: 9.0, h: 0.025, fill: { color: COLORS.rule }
-});
 
 // Interpretation
 slide.addText("Interpretation", {
@@ -365,19 +331,17 @@ slide.addText([
 Do not follow it with "Thank You," a blank slide, or a transition to appendix slides during Q&A.
 
 ```javascript
-// Dark background treatment — mirrors the title slide (sandwich structure)
-slide.background = { color: COLORS.primary };
+// Same paper background as every slide (no dark slides)
+slide.background = { color: COLORS.bg };
 
 // "Conclusions" label
 slide.addText("Conclusions", {
   x: MARGIN, y: 0.25, w: 9.0, h: 0.45,
-  fontSize: 20, fontFace: FONTS.face, color: "A0BBDD", bold: false, align: "left"
+  fontSize: 20, fontFace: FONTS.face, color: COLORS.accent, bold: true, align: "left"
 });
 
-// Accent rule
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: MARGIN, y: 0.7, w: 9.0, h: 0.04, fill: { color: COLORS.accent }
-});
+// Optional: a small hand-drawn icon beside each takeaway (scripts/vec.js), e.g.
+// addIllustration(pres, slide, "out/takeaway1.json", MARGIN, 0.95, 1, "<what it shows>");
 
 // Key takeaways — numbered for easy reference during Q&A
 slide.addText([
@@ -389,14 +353,14 @@ slide.addText([
   { text: "consistent with skill complementarity models.", options: { breakLine: true } },
 ], {
   x: MARGIN, y: 0.85, w: 9.0, h: 3.5,
-  fontSize: FONTS.body + 1, fontFace: FONTS.face, color: "FFFFFF",
+  fontSize: FONTS.body + 1, fontFace: FONTS.face, color: COLORS.body,
   paraSpaceAfter: 20
 });
 
 // Contact + link
 slide.addText("jane.smith@university.edu  |  Working paper: bit.ly/smith2025", {
   x: MARGIN, y: 4.8, w: 7.0, h: 0.4,
-  fontSize: 14, fontFace: FONTS.face, color: "A0BBDD", align: "left"
+  fontSize: 14, fontFace: FONTS.face, color: COLORS.muted, align: "left"
 });
 
 // Optional QR code (add as image)
@@ -410,25 +374,23 @@ slide.addText("jane.smith@university.edu  |  Working paper: bit.ly/smith2025", {
 **Purpose:** Orient the audience at the start of each major section.
 
 ```javascript
-// Use same dark treatment as title/conclusions
-slide.background = { color: "1A3A5C" };  // Slightly lighter navy for variety
+// Same paper background as every slide (no dark slides)
+slide.background = { color: COLORS.bg };
 
 // Section number / label
 slide.addText("Part 2", {
   x: MARGIN, y: 1.8, w: 9.0, h: 0.4,
-  fontSize: 16, fontFace: FONTS.face, color: "7BAFD4", bold: false, align: "left"
+  fontSize: 16, fontFace: FONTS.face, color: COLORS.accent, bold: false, align: "left"
 });
 
 // Section title
 slide.addText("Empirical Strategy", {
   x: MARGIN, y: 2.2, w: 9.0, h: 1.0,
-  fontSize: 36, fontFace: FONTS.face, color: "FFFFFF", bold: true, align: "left"
+  fontSize: 36, fontFace: FONTS.face, color: COLORS.primary, bold: true, align: "left"
 });
 
-// Accent rule
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: MARGIN, y: 3.3, w: 2.5, h: 0.06, fill: { color: COLORS.accent }
-});
+// Optional: a hand-drawn underline in the highlight color instead of a ruled line
+// (draw it as part of a small illustration with hlUnderline from scripts/draw_helpers.js)
 ```
 
 ---
@@ -448,7 +410,7 @@ const barH = 0.28;
 // Background bar
 slide.addShape(pres.shapes.RECTANGLE, {
   x: 0, y: barY, w: 10, h: barH,
-  fill: { color: "F0F4F8" }, line: { color: "F0F4F8" }
+  fill: { color: COLORS.lightFill }, line: { color: COLORS.lightFill }
 });
 
 // Section labels
@@ -489,9 +451,6 @@ slide.addText("References", {
   fontSize: 24, fontFace: FONTS.face, color: COLORS.primary, bold: true
 });
 
-slide.addShape(pres.shapes.RECTANGLE, {
-  x: MARGIN, y: 0.72, w: 9.0, h: 0.025, fill: { color: COLORS.rule }
-});
 
 const refs = [
   "Cunha, F. & Heckman, J.J. (2007). The Technology of Skill Formation. American Economic Review, 97(2), 31–47.",

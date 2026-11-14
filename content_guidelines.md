@@ -78,7 +78,7 @@ Place figures on the **left side** of the slide. Interpretive bullets or discuss
 Tables require more cognitive load to parse quickly under time pressure. Use a graph when showing a trend, comparison, or distribution. Reserve tables for precise numerical comparisons where the exact values matter.
 
 ### Rebuild figures from your paper
-Do not copy figures directly from a PDF. Paper figures are typically too small, use print-resolution fonts, and have captions that will not render well on screen. Rebuild them at presentation resolution with larger fonts (≥ 16 pt for axis labels).
+Do not copy figures directly from a PDF. Paper figures are typically too small, use print-resolution fonts, and have captions that will not render well on screen. Rebuild them at presentation resolution with larger fonts (≥ 16 pt for axis labels). Exception: if the user supplies a finished plot, insert it as given — cropped and enlarged enough to read, with its source cited.
 
 ### Don't include exhibits you won't discuss
 If you include it, discuss it. If you won't have time to discuss it, move it to the appendix.
@@ -221,7 +221,7 @@ When you say "I'll stop there," the conclusions slide should already be on scree
 
 ### Accessibility basics
 - Minimum 20 pt body text; 24 pt+ titles
-- High contrast between text and background (dark text on white, or white on dark)
+- High contrast between text and background (dark text on the paper background, at least 4.5:1)
 - Do not rely on colour alone to convey meaning (use labels, patterns, or shapes as well)
 - Provide alt text on figures if the slides will be circulated as a PDF
 
@@ -237,7 +237,7 @@ When you say "I'll stop there," the conclusions slide should already be on scree
 | Evidence without a "so what" | Annotate the key finding directly on the chart |
 | Uncited borrowed figures | Cite on the slide; full reference on References slide |
 | Body text < 20 pt | Remove content until it fits at 20 pt |
-| Inconsistent formatting | One font, one citation style, consistent grid alignment |
+| Inconsistent formatting | Consistent fonts (Open Sans for text, Solitreo inside drawings, Neo Euler for math), one citation style, consistent grid alignment |
 | Slides you won't discuss | Move to appendix if you won't have time |
 | Going over time | Rehearse under time; know what to cut |
 | Ending on "Thank You" | End on conclusions slide; it stays up during Q&A |
