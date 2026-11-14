@@ -31,7 +31,7 @@ function dot(x, y, r, fill) {
   return add(c);
 }
 
-// ---- highlight marks: orange, hand-drawn, dashed; use whatever form fits, as many as needed ----
+// ---- highlight marks: orange, hand-drawn, dashed; use rarely (usually ≤ 1 per slide), never as content ----
 const HL = { stroke: HIGHLIGHT, strokeWidth: 3, roughness: 1.4, bowing: 2, strokeLineDash: [10, 7], disableMultiStroke: true };
 function hlLoop(cx, cy, w, h) { return tag(ellipse(cx, cy, w, h, HL), "highlight"); }
 function hlUnderline(x1, y, x2) { return tag(line(x1, y, x2, y + 2, HL), "highlight"); }

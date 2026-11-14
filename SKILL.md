@@ -82,7 +82,7 @@ The visual style is a **hand-drawn sketchbook**: off-white paper, black ink, one
 | Muted text, citations | `737373` |
 
 - **Blue marks the focus of the slide** — whatever the title is about: the key result, the group of interest, the step being explained, the passage under discussion. **Beige is everything around it** — context, comparison groups, background objects. Keep this mapping consistent across the deck.
-- **Orange means "look here."** Draw it by hand, dashed, in whatever form suits the spot — a loop around a number, an underline, an arrow, a bracket, a box. Use as many as the content needs.
+- **Orange means "look here" — use it rarely**, only for something the audience must not miss (usually at most one per slide; many slides need none). Draw it by hand, dashed, in whatever form suits the spot — a loop around a number, an arrow, a bracket, a box. Orange is only for these marks, never for content such as arrows, labels or symbols, and never placed beside a content line where it could be mistaken for one.
 - Beige and light fills always keep an ink outline (they are too light to stand alone on the paper).
 - Use color to **direct attention**, not for decoration. No gradients and no colors outside this palette.
 
