@@ -110,11 +110,18 @@ Use size and weight for hierarchy within each typeface. Solitreo has no bold wei
 - For result slides: figure on the left, interpretive bullets on the right. This matches natural left-to-right reading.
 - White space is a signal of analytical clarity — do not fill every inch.
 - 16:9 widescreen is the default. Confirm with the user if they know the venue's aspect ratio.
-- **At most two focal areas per slide.** A focal area is one thing the eye goes to: a drawing, an equation block, a bullet group, a callout. Title and citation don't count. A row of comparable panels reads as one area. If a slide needs three (e.g. diagram + equation + bullets), split it.
+- **At most two focal areas per slide.** A focal area is one thing the eye goes to: a drawing, an equation block, a bullet group, a callout. Title and citation don't count. A row of comparable panels reads as one area. If a slide needs three (e.g. diagram + equation + bullets), or there is simply too much content, break it into two or more slides — never drop key information to make it fit.
 
 ### Drawings
 
-When a drawing would make a point clearer than words — a setup, a contrast, a count, a process — prefer the drawing plus a short sentence, and move anything cut from the slide into the speaker notes. Text in boxes is not a drawing: a diagram's nodes should be drawn things, not labeled rectangles.
+Drawings are for visual aid and better understanding — they never replace key information. Every slide's key point stays fully on the slide.
+
+- When complex information can be expressed as a drawing plus simpler words **without losing anything**, do it that way.
+- Otherwise keep the key information on the slide as it is, and add a drawing beside it where it helps understanding.
+- Speaker notes hold only what the presenter adds beyond the slide — never the key point or information the slide needs.
+- If the key information and its drawing don't fit in two focal areas, break the content into two or more slides rather than cutting it.
+
+Text in boxes is not a drawing: a diagram's nodes should be drawn things, not labeled rectangles.
 
 Good moves:
 - **Draw the setup or the thing being studied**: the experimental rig, the cell and its pathway, the field site on a map sketch, the classroom layout, the archive and its documents.
